@@ -1,0 +1,39 @@
+spring:
+  kafka:
+    producer:
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
+    consumer:
+      bootstrap-servers: localhost:9092
+      properties:
+        spring:
+          json:
+            add:
+              type:
+                headers: false
+
+first:
+  topic: ordersimple
+
+second:
+  topic: orderinfocomplete
+
+
+#topic:             É o nome do tópico utilizado no envio para o Kafka.
+#key-serializer:    É o tipo de serialização da chave da mensagem, no caso vamos manter como String.
+#value-serializer:  É o tipo de serialização do conteúdo da mensagem, que vamos alterar para um formato Json.
+#bootstrap-servers: URL do Kafka.
+#headers:           Como vamos enviar a mensagem como Json e não sabemos qual o tipo da mensagem,
+#                   desabilitamos a adição 'tipo' no header da mensagem.
+
+
+#Quando não declaramos a propriedade add.type.headers como false o producer automaticamente
+#coloca o tipo do objetivo produzido no header da mensagem e consequentemente o consumer
+#deverá esperar esse mesmo tipo, então como estão enviando um texto no formato de Json e
+#vamos consumir um objeto do tipo Order.class, devemos desabilitar essa passagem de tipo por parâmetro.
+
+#Quando estamos trabalhando com classes com os mesmo tipos no producer e no consumer não
+#precisamos desativar essa propriedade.
+
+#Na aplicação consumer, vamos adicionar o Jackson para fazer a conversão de Json para classe e
+#também adicionar algumas configurações.

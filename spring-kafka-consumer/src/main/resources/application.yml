@@ -1,0 +1,26 @@
+server:
+  port: 8081
+
+spring:
+  kafka:
+    consumer:
+      bootstrap-servers: localhost:9092
+      group-id: group-id
+      auto-offset-reset: earliest
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
+
+first:
+  topic: ordersimple
+
+second:
+  topic: orderinfocomplete
+
+#topic:             É o nome do tópico consumido no Kafka.
+#bootstrap-servers: URL do Kafka.
+#key-serializer:    É o tipo de serialização da chave da mensagem, no caso vamos manter como String.
+#value-serializer:  É o tipo de serialização do conteúdo da mensagem, que vamos alterar para um formato Json.
+#auto-offset-reset: É a configuração da posição inicial que será consumida do tópico, no caso “earliest”,
+#                   então será do início do tópico.
+#group-id:          É o identificador do grupo de consumo do tópico, responsável pelas configurações de
+#                   consumo em paralelo do tópico.
